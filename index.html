@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <!-- Character encoding set karo -->
+  <meta charset="UTF-8" />
+
+  <!-- Mobile pe sahi size ke liye viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>My Todo List ✅</title>
+
+  <!-- Google Fonts: Display ke liye Playfair Display, body ke liye DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Apni CSS file link karo -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ======= MAIN WRAPPER ======= -->
+  <div class="app-wrapper">
+
+    <!-- ---- HEADER ---- -->
+    <header class="app-header">
+      <h1 class="app-title">My Todo List</h1>
+      <p class="app-subtitle">Aaj kya karna hai? 🎯</p>
+    </header>
+
+    <!-- ---- INPUT SECTION ---- -->
+    <div class="input-section">
+      <!-- Task likhne ka input box -->
+      <input
+        type="text"
+        id="taskInput"
+        class="task-input"
+        placeholder="Naya task likho..."
+        maxlength="100"
+        autocomplete="off"
+      />
+
+      <!-- Add button -->
+      <button id="addBtn" class="add-btn" title="Task Add Karo">
+        <span class="btn-icon">+</span>
+        <span class="btn-text">Add</span>
+      </button>
+    </div>
+
+    <!-- ---- STATS BAR ---- -->
+    <!-- Kitne total aur kitne complete hue — dynamically update hoga JS se -->
+    <div class="stats-bar">
+      <span id="totalCount">0 tasks</span>
+      <span class="stats-dot">•</span>
+      <span id="doneCount">0 done</span>
+    </div>
+
+    <!-- ---- TASK LIST ---- -->
+    <!-- Yahan JS dynamically tasks add karega -->
+    <ul class="task-list" id="taskList">
+      <!-- Tasks yahan aayenge -->
+    </ul>
+
+    <!-- ---- EMPTY STATE (jab koi task nahi) ---- -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">📋</div>
+      <p>Koi task nahi hai abhi.<br />Upar se kuch add karo!</p>
+    </div>
+
+    <!-- ---- FOOTER ---- -->
+    <footer class="app-footer">
+      Tasks browser mein save rehte hain 💾
+    </footer>
+
+  </div>
+
+  <!-- JavaScript file link karo — body ke end mein taaki HTML pehle load ho -->
+  <script src="script.js"></script>
+
+</body>
+</html>

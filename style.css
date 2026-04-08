@@ -1,0 +1,374 @@
+/* ================================================
+   style.css — Todo App ka poora design
+   ================================================ */
+
+/* ---- CSS Variables: Ek jagah rang badlo, poora app update ---- */
+:root {
+  --bg-main: #0f0f13;           /* Dark background */
+  --bg-card: #1a1a24;           /* Card background */
+  --bg-input: #22222f;          /* Input background */
+  --accent: #f5c518;            /* Yellow accent */
+  --accent-hover: #e6b800;      /* Hover state */
+  --text-primary: #f0f0f5;      /* Main text */
+  --text-secondary: #8888aa;    /* Muted text */
+  --text-done: #55556a;         /* Strike-through text */
+  --border: #2e2e42;            /* Borders */
+  --danger: #ff5555;            /* Delete button */
+  --danger-hover: #cc3333;
+  --radius: 14px;               /* Border radius */
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --transition: 0.2s ease;
+}
+
+/* ---- Global Reset ---- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---- Body ---- */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;   /* Top se shuru */
+  justify-content: center;
+  padding: 40px 16px 60px;   /* Mobile ke liye padding */
+
+  /* Subtle grid texture background */
+  background-image:
+    linear-gradient(rgba(245, 197, 24, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 197, 24, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ---- App Wrapper: Main Card ---- */
+.app-wrapper {
+  width: 100%;
+  max-width: 560px;             /* Desktop pe max width */
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: slideUp 0.5s ease;
+}
+
+/* App load hone pe smooth animation */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Header ---- */
+.app-header {
+  padding: 36px 32px 24px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+/* Header ke peeche decorative line */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.app-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.app-subtitle {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* ---- Input Section ---- */
+.input-section {
+  display: flex;
+  gap: 10px;
+  padding: 24px 24px 16px;
+}
+
+.task-input {
+  flex: 1;                      /* Remaining space le lo */
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-primary);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+/* Input focus pe glow effect */
+.task-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.12);
+}
+
+.task-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* ---- Add Button ---- */
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: #0f0f13;               /* Dark text on yellow */
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 197, 24, 0.3);
+}
+
+.add-btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* ---- Stats Bar ---- */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 26px 16px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.stats-dot {
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+
+/* ---- Task List ---- */
+.task-list {
+  list-style: none;
+  padding: 0 16px;
+  max-height: 420px;            /* Scroll ke liye max height */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* Custom scrollbar (Chrome/Edge) */
+.task-list::-webkit-scrollbar { width: 5px; }
+.task-list::-webkit-scrollbar-track { background: transparent; }
+.task-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+/* ---- Task Item ---- */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+  animation: taskIn 0.3s ease;
+}
+
+/* Naya task aane pe animation */
+@keyframes taskIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.task-item:hover {
+  border-color: rgba(245, 197, 24, 0.25);
+  background: #26263a;
+}
+
+/* ---- Custom Checkbox ---- */
+.task-checkbox {
+  appearance: none;             /* Default style hatao */
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;              /* Shrink mat ho */
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+  background: transparent;
+}
+
+/* Checkbox hover */
+.task-checkbox:hover {
+  border-color: var(--accent);
+}
+
+/* Checked state */
+.task-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Checkmark (✓) CSS se banana */
+.task-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #0f0f13;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* ---- Task Text ---- */
+.task-text {
+  flex: 1;                      /* Baaki jagah le lo */
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  word-break: break-word;       /* Long words break ho jayein */
+  transition: all var(--transition);
+  line-height: 1.4;
+}
+
+/* Complete hone pe strikethrough */
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-done);
+}
+
+/* Complete hone pe item dim ho jaye */
+.task-item.completed {
+  opacity: 0.7;
+}
+
+/* ---- Delete Button ---- */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: all var(--transition);
+  line-height: 1;
+  opacity: 0;                   /* Default mein hide */
+  min-width: 28px;
+}
+
+/* Task hover pe delete button dikhao */
+.task-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  color: var(--danger);
+  background: rgba(255, 85, 85, 0.1);
+}
+
+/* Mobile pe hamesha dikhao (hover nahi hota) */
+@media (hover: none) {
+  .delete-btn { opacity: 1; }
+}
+
+/* ---- Empty State ---- */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  display: none;                /* JS show/hide karega */
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ---- Footer ---- */
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
+/* ================================================
+   RESPONSIVE — Mobile ke liye adjustments
+   ================================================ */
+@media (max-width: 480px) {
+
+  body {
+    padding: 20px 12px 40px;
+  }
+
+  .app-header {
+    padding: 28px 20px 20px;
+  }
+
+  .app-title {
+    font-size: 1.6rem;
+  }
+
+  .input-section {
+    padding: 20px 16px 12px;
+    flex-wrap: wrap;            /* Button neeche chala jaye */
+  }
+
+  .task-input {
+    width: 100%;
+  }
+
+  .add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .task-list {
+    padding: 0 10px;
+  }
+
+  .stats-bar {
+    padding: 4px 20px 14px;
+  }
+}
