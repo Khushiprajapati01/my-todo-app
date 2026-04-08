@@ -22,8 +22,7 @@ Ek simple aur sundar **Personal Todo List** web application.
 
 ## 🚀 Live Demo
 
-[→ App Ko Yahan Try Karo](https://khushiprajapati01.github.io/my-todo-app)  
-*(Live link baad mein yahan aa jaayega)*
+[→ App Ko Yahan Try Karo](https://khushiprajapati01.github.io/my-todo-app)
 
 ## 📸 Screenshots
 
